@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Prova D1</string>
+    <string name="busca_heroi">Nome da universidade</string>
+    <string name="botao_busca">Buscar</string>
+</resources>
