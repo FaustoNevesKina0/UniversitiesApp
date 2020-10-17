@@ -1,4 +1,4 @@
-package br.usjt.ads20.appfilmes;
+package br.usjt.ads20.prova;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-import br.usjt.ads20.appfilmes.model.Dados;
-import br.usjt.ads20.appfilmes.model.Universidade;
+import br.usjt.ads20.prova.model.Dados;
+import br.usjt.ads20.prova.model.Universidade;
 
 /**
  * Fausto Neves Kina

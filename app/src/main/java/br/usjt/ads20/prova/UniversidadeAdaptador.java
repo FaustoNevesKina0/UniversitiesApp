@@ -1,4 +1,4 @@
-package br.usjt.ads20.appfilmes;
+package br.usjt.ads20.prova;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import br.usjt.ads20.appfilmes.model.Universidade;
+import br.usjt.ads20.prova.model.Universidade;
 /**
  * Fausto Neves Kina
  * RA 81820328

@@ -1,4 +1,4 @@
-package br.usjt.ads20.appfilmes.model;
+package br.usjt.ads20.prova.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package br.usjt.ads20.appfilmes;
+package br.usjt.ads20.prova;
 
 import android.content.Context;
 

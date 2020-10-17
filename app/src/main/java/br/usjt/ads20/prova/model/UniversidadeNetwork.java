@@ -1,4 +1,4 @@
-package br.usjt.ads20.appfilmes.model;
+package br.usjt.ads20.prova.model;
 
 import android.util.Log;
 

@@ -1,10 +1,9 @@
-package br.usjt.ads20.appfilmes;
+package br.usjt.ads20.prova;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -16,8 +15,8 @@ import com.facebook.stetho.Stetho;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import br.usjt.ads20.appfilmes.model.Universidade;
-import br.usjt.ads20.appfilmes.model.UniversidadeNetwork;
+import br.usjt.ads20.prova.model.Universidade;
+import br.usjt.ads20.prova.model.UniversidadeNetwork;
 /**
  * Fausto Neves Kina
  * RA 81820328
