@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_list_universities.*
 import java.util.*
 
-class UniversitiesListActivity : AppCompatActivity() {
+class UniversitiesListActivity : AppCompatActivity(), UniversityAdapter.OnUniversityListener {
     lateinit var list: List<University>
     var activity: Activity? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,12 +22,16 @@ class UniversitiesListActivity : AppCompatActivity() {
         UniversityData.setUniversities(universities)
         list = UniversityData.getUniversities(keyValue)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerView.adapter = UniversityAdapter(list, this) {
-            val uri = Uri.parse(it.webPages)
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            if (intent.resolveActivity(packageManager) != null) {
-                startActivity(intent)
-            }
+
+        recyclerView.adapter = UniversityAdapter(list, this, this)
+    }
+
+    override fun onUniversityClick(position: Int) {
+        var universityItem = list[position]
+        val uri = Uri.parse(universityItem.webPages)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
         }
     }
 }

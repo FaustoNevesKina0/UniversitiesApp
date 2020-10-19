@@ -8,24 +8,27 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import kotlinx.android.synthetic.main.university_view.view.*
 
-class UniversityAdapter(private val universities: List<University>, private val context: Context, private val listener: (University) -> Unit) : Adapter<UniversityAdapter.ViewHolder>() {
+class UniversityAdapter(private val universities: List<University>, private val context: Context, private var listener: OnUniversityListener /*, private val listener: (University) -> Unit*/) : Adapter<UniversityAdapter.ViewHolder>() {
+
+    var universityListener: OnUniversityListener = listener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.university_view, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, universityListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val university = universities[position]
+//        holder.itemView.setOnClickListener { listener(university) }
         holder.bindView(university)
-        holder.itemView.setOnClickListener { listener(university) }
     }
 
     override fun getItemCount(): Int {
         return universities.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View, listener: OnUniversityListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        var universityListener = listener
         fun bindView(university: University) {
             val image = itemView.image
             val name = itemView.name
@@ -33,9 +36,23 @@ class UniversityAdapter(private val universities: List<University>, private val 
             val url = itemView.url
 
             image.setImageBitmap(Util.drawLogo(context, university.alphaTwoCode))
+            image.setOnClickListener(this)
             name.text = university.name
+            name.setOnClickListener(this)
             country.text = university.country
+            country.setOnClickListener(this)
             url.text = university.webPages
+            url.setOnClickListener(this)
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            universityListener.onUniversityClick(adapterPosition)
         }
     }
+
+    interface OnUniversityListener {
+        fun onUniversityClick(position: Int)
+    }
+
 }

@@ -17,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
+        android:clickable="true"
         tools:src="@drawable/ic_launcher_background" />
 
     <TextView
@@ -35,6 +36,7 @@
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.008"
+        android:clickable="true"
         tools:text="NOME DA UNIVERSIDADE" />
 
     <TextView
@@ -52,6 +54,7 @@
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintVertical_bias="0.0"
+        android:clickable="true"
         tools:text="PAÍS" />
 
     <TextView
@@ -70,6 +73,7 @@
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toBottomOf="@+id/country"
         app:layout_constraintVertical_bias="0.0"
+        android:clickable="true"
         tools:text="URL" />
 
     <androidx.constraintlayout.widget.Guideline
