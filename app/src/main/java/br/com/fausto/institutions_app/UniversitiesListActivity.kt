@@ -1,4 +1,4 @@
-package br.usjt.ads20.atividaded1
+package br.com.fausto.institutions_app
 
 import android.app.Activity
 import android.content.Intent
@@ -9,12 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_list_universities.*
 import java.util.*
 
+
 class UniversitiesListActivity : AppCompatActivity(), UniversityAdapter.OnUniversityListener {
     lateinit var list: List<University>
     var activity: Activity? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_universities)
+
         activity = this
         val intent = intent
         val keyValue = intent.getStringExtra(MainActivity.NAME)

@@ -1,4 +1,4 @@
-package br.usjt.ads20.atividaded1
+package br.com.fausto.institutions_app
 
 import android.content.Context
 import android.graphics.Bitmap

@@ -1,6 +1,5 @@
-package br.usjt.ads20.atividaded1
+package br.com.fausto.institutions_app
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
@@ -34,21 +33,15 @@ class MainActivity : AppCompatActivity() {
         getAllUniversities().execute(url + txtName.text.toString())
     }
 
-//    suspend fun getUniversidades(url: String) {
-//        val job = coroutineScope {
-//            UniversityNetwork.searchUniversities(url)
-//        }
-//    }
-
     private inner class getAllUniversities : AsyncTask<String?, Void?, ArrayList<University?>>() {
         override fun doInBackground(vararg params: String?): ArrayList<University?> {
-            var universidades = ArrayList<University?>()
+            var universities = ArrayList<University?>()
             try {
-                universidades = UniversityNetwork.searchUniversities(params[0])
+                universities = UniversityNetwork.searchUniversities(params[0])
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-            return universidades
+            return universities
         }
 
         override fun onPostExecute(universities: ArrayList<University?>) {

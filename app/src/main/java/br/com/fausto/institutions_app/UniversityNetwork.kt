@@ -1,4 +1,4 @@
-package br.usjt.ads20.atividaded1
+package br.com.fausto.institutions_app
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -24,7 +24,11 @@ object UniversityNetwork {
                 university.country = item.getString("country")
                 val pages = item.getJSONArray("web_pages")
                 university.webPages = pages.getString(0)
-                universities.add(university)
+                if (universities.size > 1200) {
+                    return universities
+                } else {
+                    universities.add(university)
+                }
             }
         } catch (e: JSONException) {
             e.printStackTrace()
