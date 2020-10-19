@@ -1,4 +1,4 @@
-package br.usjt.ads20.prova;
+package br.usjt.ads20.atividaded1;
 
 import android.content.Context;
 
