@@ -1,5 +1,6 @@
 package br.com.fausto.institutions_app
 
+import br.com.fausto.institutions_app.model.University
 import java.util.*
 import java.util.Collections.sort
 

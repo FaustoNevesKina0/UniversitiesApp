@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.facebook.stetho.Stetho
+import br.com.fausto.institutions_app.model.University
+import br.com.fausto.institutions_app.repository.UniversityRepository
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 import java.util.*
@@ -22,15 +25,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Stetho.initializeWithDefaults(this)
         progressBar = progressBarMainActivity
         txtName = edit_text_search
         context = this
+
     }
 
     fun btnSearch(view: View) {
         progressBar.visibility = View.VISIBLE
-        getAllUniversities().execute(url + txtName.text.toString())
+//        getAllUniversities().execute(url + txtName.text.toString())
+        loadUniversitiesList(txtName.text.toString())
+    }
+
+    private fun loadUniversitiesList(name: String) {
+        val universityRepository = UniversityRepository()
+        universityRepository.getListOfUniversities(name, success = {
+            Log.e("SUCCESS", "Success")
+            startActivity(Intent(this, UniversitiesListActivity::class.java))
+        }, failure = {
+            Toast.makeText(this, "check your ethernet connection", Toast.LENGTH_SHORT).show()
+        })
     }
 
     private inner class getAllUniversities : AsyncTask<String?, Void?, ArrayList<University?>>() {

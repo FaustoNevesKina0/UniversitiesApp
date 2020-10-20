@@ -1,5 +1,6 @@
 package br.com.fausto.institutions_app
 
+import br.com.fausto.institutions_app.model.University
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray

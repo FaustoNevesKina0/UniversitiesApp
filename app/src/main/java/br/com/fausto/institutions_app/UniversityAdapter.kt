@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import br.com.fausto.institutions_app.model.University
 import kotlinx.android.synthetic.main.university_view.view.*
 
 class UniversityAdapter(private val universities: List<University>, private val context: Context, private var listener: OnUniversityListener /*, private val listener: (University) -> Unit*/) : Adapter<UniversityAdapter.ViewHolder>() {
 
-    var universityListener: OnUniversityListener = listener
+    private var universityListener: OnUniversityListener = listener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.university_view, parent, false)

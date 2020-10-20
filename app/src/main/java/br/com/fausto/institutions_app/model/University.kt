@@ -1,4 +1,4 @@
-package br.com.fausto.institutions_app
+package br.com.fausto.institutions_app.model
 
 import android.widget.ImageView
 import java.io.Serializable
