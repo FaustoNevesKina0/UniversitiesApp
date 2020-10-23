@@ -1,6 +1,5 @@
 package br.com.fausto.institutions_app.retrofit
 
-import android.util.Log
 import br.com.fausto.institutions_app.model.UniversityParsed
 import retrofit2.Call
 import retrofit2.Callback
