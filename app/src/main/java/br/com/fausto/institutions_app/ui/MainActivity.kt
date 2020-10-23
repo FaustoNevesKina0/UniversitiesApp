@@ -1,15 +1,15 @@
-package br.com.fausto.institutions_app
+package br.com.fausto.institutions_app.ui
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import br.com.fausto.institutions_app.R
 import br.com.fausto.institutions_app.viewmodel.UniversityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         progressBar = progressBarMainActivity
         txtName = edit_text_search
         context = this
-
     }
 
     fun btnSearch(view: View) {
@@ -33,16 +32,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadUniversitiesList(name: String) {
-//        val universityViewModel = UniversityViewModel()
         val viewModel = ViewModelProvider(this).get(UniversityViewModel::class.java)
         viewModel.getListOfUniversities(name, success = {
             val intent = Intent(this, UniversitiesListActivity::class.java)
             intent.putExtra("list", it)
-            Log.e("SUCCESS", "Success")
             progressBar.visibility = View.INVISIBLE
             startActivity(intent)
         }, failure = {
-            Toast.makeText(this, "check your ethernet connection", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Check your ethernet connection", Toast.LENGTH_SHORT).show()
         })
     }
 }

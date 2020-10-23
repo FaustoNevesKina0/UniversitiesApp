@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Institutions App</string>
-    <string name="busca_heroi">Institutions name</string>
-    <string name="botao_busca">Search</string>
+    <string name="institutions_label">Institutions name</string>
+    <string name="search_button">Search</string>
 </resources>

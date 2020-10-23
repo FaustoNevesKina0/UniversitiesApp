@@ -19,7 +19,6 @@ class UniversityClient {
         call.enqueue(object : Callback<UniversityParsed> {
             override fun onResponse(call: Call<UniversityParsed>, response: Response<UniversityParsed>) {
                 if (response.isSuccessful) {
-                    Log.e("status code", response.code().toString())
                     success(response.body())
                 } else {
                     failure(REQUEST_FAILED)

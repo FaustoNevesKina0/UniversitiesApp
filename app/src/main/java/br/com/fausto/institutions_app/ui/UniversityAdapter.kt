@@ -1,4 +1,4 @@
-package br.com.fausto.institutions_app
+package br.com.fausto.institutions_app.ui
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import br.com.fausto.institutions_app.R
+import br.com.fausto.institutions_app.util.ImageGenerator
 import br.com.fausto.institutions_app.model.UniversityParsedItem
 import kotlinx.android.synthetic.main.university_view.view.*
 import org.json.JSONArray
 
-class UniversityAdapter(private val universities: ArrayList<UniversityParsedItem>, private val context: Context, private var listener: OnUniversityListener /*, private val listener: (University) -> Unit*/) : Adapter<UniversityAdapter.ViewHolder>() {
+class UniversityAdapter(private val universities: MutableList<UniversityParsedItem>, private val context: Context, private var listener: OnUniversityListener /*, private val listener: (University) -> Unit*/) : Adapter<UniversityAdapter.ViewHolder>() {
 
     private var universityListener: OnUniversityListener = listener
 
@@ -20,7 +22,7 @@ class UniversityAdapter(private val universities: ArrayList<UniversityParsedItem
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val university = universities[0]
+        val university = universities[position]
         holder.bindView(university)
     }
 
@@ -33,7 +35,7 @@ class UniversityAdapter(private val universities: ArrayList<UniversityParsedItem
             val country = itemView.country
             val url = itemView.url
 
-            image.setImageBitmap(Util.drawLogo(context, university.alpha_two_code))
+            image.setImageBitmap(ImageGenerator.draw(context, university.alpha_two_code))
             image.setOnClickListener(this)
             name.text = university.name
             name.setOnClickListener(this)

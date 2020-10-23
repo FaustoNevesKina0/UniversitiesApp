@@ -14,8 +14,8 @@
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
-        <activity android:name="br.com.fausto.institutions_app.UniversitiesListActivity" />
-        <activity android:name="br.com.fausto.institutions_app.MainActivity">
+        <activity android:name="br.com.fausto.institutions_app.ui.UniversitiesListActivity" />
+        <activity android:name="br.com.fausto.institutions_app.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
