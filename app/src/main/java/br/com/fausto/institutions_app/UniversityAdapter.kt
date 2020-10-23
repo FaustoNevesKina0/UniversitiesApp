@@ -11,7 +11,7 @@ import br.com.fausto.institutions_app.model.UniversityParsedItem
 import kotlinx.android.synthetic.main.university_view.view.*
 import org.json.JSONArray
 
-class UniversityAdapter(private val universities: List<UniversityParsedItem>, private val context: Context, private var listener: OnUniversityListener /*, private val listener: (University) -> Unit*/) : Adapter<UniversityAdapter.ViewHolder>() {
+class UniversityAdapter(private val universities: ArrayList<UniversityParsedItem>, private val context: Context, private var listener: OnUniversityListener /*, private val listener: (University) -> Unit*/) : Adapter<UniversityAdapter.ViewHolder>() {
 
     private var universityListener: OnUniversityListener = listener
 

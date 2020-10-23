@@ -1,7 +1,5 @@
 package br.com.fausto.institutions_app
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -18,34 +16,29 @@ class UniversitiesListActivity : AppCompatActivity(), UniversityAdapter.OnUniver
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_universities)
 
-//        viewModel = ViewModelProvider(this).get(UniversityViewModel::class.java)
-
-//        viewModel.universityList.observe(this, {
-//            list = it
-//        })
-
-//        list = viewModel.getList()
-
         val intent = intent
         val list: ArrayList<UniversityParsed> = intent.getSerializableExtra("list") as ArrayList<UniversityParsed>
 
         val list1 = list.toArray()
+        val list2: Array<UniversityParsedItem>
         val arrayParseado = ArrayList<UniversityParsedItem>()
+
         val listaFinal: List<UniversityParsedItem>
+        val arrayFinal: Array<UniversityParsedItem>
 
         listaFinal = arrayParseado.toList()
+//        arrayFinal = arrayParseado.toArray() as Array<UniversityParsedItem>
 
         for (i in list1) {
             arrayParseado.add(i as UniversityParsedItem)
             Log.e("MORGAN FREEMAN", i.name.toString())
         }
 
-//        Log.e("a lista amalucada", doideira)
-//        Log.e("a lista amalucada", doideira2.toString())
+//        for (e in listaFinal) {
+//            Log.e("DENZEL WASHINGTON", e.name.toString())
+//        }
 
-//        var listaParseada:Array<UniversityParsedItem> = list.toArray() as Array<UniversityParsedItem>
-
-        recyclerView.adapter = UniversityAdapter(listaFinal, this, this)
+        recyclerView.adapter = UniversityAdapter(arrayParseado, this, this)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
     }
