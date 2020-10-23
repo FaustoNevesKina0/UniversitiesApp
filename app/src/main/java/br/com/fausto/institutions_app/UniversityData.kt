@@ -5,6 +5,7 @@ import java.util.*
 import java.util.Collections.sort
 
 object UniversityData {
+
     private var universities: List<University>? = null
     fun setUniversities(pUniversities: List<University>?) {
         universities = pUniversities

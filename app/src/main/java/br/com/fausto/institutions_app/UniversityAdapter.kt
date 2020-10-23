@@ -1,15 +1,17 @@
 package br.com.fausto.institutions_app
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import br.com.fausto.institutions_app.model.University
+import br.com.fausto.institutions_app.model.UniversityParsedItem
 import kotlinx.android.synthetic.main.university_view.view.*
+import org.json.JSONArray
 
-class UniversityAdapter(private val universities: List<University>, private val context: Context, private var listener: OnUniversityListener /*, private val listener: (University) -> Unit*/) : Adapter<UniversityAdapter.ViewHolder>() {
+class UniversityAdapter(private val universities: List<UniversityParsedItem>, private val context: Context, private var listener: OnUniversityListener /*, private val listener: (University) -> Unit*/) : Adapter<UniversityAdapter.ViewHolder>() {
 
     private var universityListener: OnUniversityListener = listener
 
@@ -19,30 +21,26 @@ class UniversityAdapter(private val universities: List<University>, private val 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val university = universities[position]
-//        holder.itemView.setOnClickListener { listener(university) }
+        val university = universities[0]
         holder.bindView(university)
     }
 
-    override fun getItemCount(): Int {
-        return universities.size
-    }
-
     inner class ViewHolder(itemView: View, listener: OnUniversityListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        var universityListener = listener
-        fun bindView(university: University) {
+        private var universityListener = listener
+        fun bindView(university: UniversityParsedItem) {
+
             val image = itemView.image
             val name = itemView.name
             val country = itemView.country
             val url = itemView.url
 
-            image.setImageBitmap(Util.drawLogo(context, university.alphaTwoCode))
+            image.setImageBitmap(Util.drawLogo(context, university.alpha_two_code))
             image.setOnClickListener(this)
             name.text = university.name
             name.setOnClickListener(this)
             country.text = university.country
             country.setOnClickListener(this)
-            url.text = university.webPages
+            url.text = JSONArray(university.web_pages).getString(0)
             url.setOnClickListener(this)
             itemView.setOnClickListener(this)
         }
@@ -56,4 +54,7 @@ class UniversityAdapter(private val universities: List<University>, private val 
         fun onUniversityClick(position: Int)
     }
 
+    override fun getItemCount(): Int {
+        return universities.size
+    }
 }

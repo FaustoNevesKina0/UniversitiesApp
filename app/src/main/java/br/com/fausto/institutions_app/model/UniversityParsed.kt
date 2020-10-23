@@ -1,3 +1,5 @@
 package br.com.fausto.institutions_app.model
 
-class UniversityParsed : ArrayList<UniversityParsedItem>()
+import java.io.Serializable
+
+class UniversityParsed : ArrayList<UniversityParsedItem>(), Serializable
