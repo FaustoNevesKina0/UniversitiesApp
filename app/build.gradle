@@ -7,8 +7,8 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "br.usjt.ads20.appfilmes"
-        minSdkVersion 27
+        applicationId "br.com.fausto.institutionsapp"
+        minSdkVersion 25
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
