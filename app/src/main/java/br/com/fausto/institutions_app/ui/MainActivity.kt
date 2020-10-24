@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.fausto.institutions_app.R
 import br.com.fausto.institutions_app.database.AppDatabase
 import br.com.fausto.institutions_app.model.UniversityParsedItem
-import br.com.fausto.institutions_app.viewmodel.UniversityRepository
+import br.com.fausto.institutions_app.repository.UniversityRepository
 import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity(), UniversityAdapter.OnUniversityListener
 
     private fun loadUniversitiesList(name: String, finished: (MutableList<UniversityParsedItem>) -> Unit) {
 
-        val viewModel = UniversityRepository(AppDatabase.getInstance(this).universityDao)
-        viewModel.getListOfUniversities(name, success = {
+        val repository = UniversityRepository(AppDatabase.getInstance(this).universityDao)
+        repository.getListOfUniversities(name, success = {
             progressBar.visibility = View.INVISIBLE
             finished(it!!)
         }, failure = {

@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.fausto.institutions_app.R
-import br.com.fausto.institutions_app.util.ImageGenerator
 import br.com.fausto.institutions_app.model.UniversityParsedItem
+import br.com.fausto.institutions_app.util.ImageGenerator
 import kotlinx.android.synthetic.main.university_view.view.*
 import org.json.JSONArray
 
