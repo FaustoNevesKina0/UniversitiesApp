@@ -2,21 +2,27 @@ package br.com.fausto.institutions_app.ui
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.fausto.institutions_app.R
-import br.com.fausto.institutions_app.viewmodel.UniversityViewModel
+import br.com.fausto.institutions_app.database.AppDatabase
+import br.com.fausto.institutions_app.model.UniversityParsedItem
+import br.com.fausto.institutions_app.viewmodel.UniversityRepository
+import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
-    lateinit var progressBar: ProgressBar
-    lateinit var txtName: EditText
+class MainActivity : AppCompatActivity(), UniversityAdapter.OnUniversityListener {
+    private lateinit var progressBar: ProgressBar
+    private lateinit var txtName: EditText
     lateinit var context: Context
+    lateinit var repository: UniversityRepository
+    private var listOfUniversities: MutableList<UniversityParsedItem>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,22 +30,37 @@ class MainActivity : AppCompatActivity() {
         progressBar = progressBarMainActivity
         txtName = edit_text_search
         context = this
+        repository = UniversityRepository(AppDatabase.getInstance(this).universityDao)
+        Stetho.initializeWithDefaults(this)
     }
 
     fun btnSearch(view: View) {
         progressBar.visibility = View.VISIBLE
-        loadUniversitiesList(txtName.text.toString())
+        loadUniversitiesList(txtName.text.toString()) {
+            listOfUniversities = it
+            recyclerView.adapter = UniversityAdapter(it, this, this)
+            recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        }
     }
 
-    private fun loadUniversitiesList(name: String) {
-        val viewModel = ViewModelProvider(this).get(UniversityViewModel::class.java)
+    private fun loadUniversitiesList(name: String, finished: (MutableList<UniversityParsedItem>) -> Unit) {
+
+        val viewModel = UniversityRepository(AppDatabase.getInstance(this).universityDao)
         viewModel.getListOfUniversities(name, success = {
-            val intent = Intent(this, UniversitiesListActivity::class.java)
-            intent.putExtra("list", it)
             progressBar.visibility = View.INVISIBLE
-            startActivity(intent)
+            finished(it!!)
         }, failure = {
+            progressBar.visibility = View.INVISIBLE
             Toast.makeText(this, "Check your ethernet connection", Toast.LENGTH_SHORT).show()
         })
+    }
+
+    override fun onUniversityClick(position: Int) {
+        val universityItem = listOfUniversities!![position]
+        val uri = Uri.parse(universityItem.web_pages!![0])
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
     }
 }

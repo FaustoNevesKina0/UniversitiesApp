@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_list_universities.*
 class UniversitiesListActivity : AppCompatActivity(), UniversityAdapter.OnUniversityListener {
 
     private lateinit var arrayListUniversities: ArrayList<UniversityParsedItem>
+    private lateinit var listaVinda: MutableList<UniversityParsedItem>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_universities)
