@@ -14,6 +14,7 @@ import br.com.fausto.institutions_app.R
 import br.com.fausto.institutions_app.database.AppDatabase
 import br.com.fausto.institutions_app.model.UniversityParsedItem
 import br.com.fausto.institutions_app.repository.UniversityRepository
+import br.com.fausto.institutions_app.util.ConnectionChecker
 import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -38,21 +39,30 @@ class MainActivity : AppCompatActivity(), UniversityAdapter.OnUniversityListener
         progressBar.visibility = View.VISIBLE
         loadUniversitiesList(txtName.text.toString()) {
             listOfUniversities = it
-            recyclerView.adapter = UniversityAdapter(it, this, this)
-            recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            runOnUiThread {
+                recyclerView.adapter = UniversityAdapter(it, this, this)
+                recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            }
         }
     }
 
     private fun loadUniversitiesList(name: String, finished: (MutableList<UniversityParsedItem>) -> Unit) {
-
         val repository = UniversityRepository(AppDatabase.getInstance(this).universityDao)
-        repository.getListOfUniversities(name, success = {
+        if (ConnectionChecker.hasInternetConnection(this)) {
+            repository.getListOfUniversities(name, success = {
+                progressBar.visibility = View.INVISIBLE
+                finished(it!!)
+            }, failure = {
+                progressBar.visibility = View.INVISIBLE
+                Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show()
+            })
+        } else {
+            Toast.makeText(this, "Last result displayed, to make a new research, connect to the ethernet", Toast.LENGTH_LONG).show()
             progressBar.visibility = View.INVISIBLE
-            finished(it!!)
-        }, failure = {
-            progressBar.visibility = View.INVISIBLE
-            Toast.makeText(this, "Check your ethernet connection", Toast.LENGTH_SHORT).show()
-        })
+            repository.loadListFromDB(success = {
+                finished(it)
+            })
+        }
     }
 
     override fun onUniversityClick(position: Int) {
