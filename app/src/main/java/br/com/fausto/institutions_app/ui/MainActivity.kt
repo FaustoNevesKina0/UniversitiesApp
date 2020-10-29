@@ -15,7 +15,6 @@ import br.com.fausto.institutions_app.database.AppDatabase
 import br.com.fausto.institutions_app.model.UniversityParsedItem
 import br.com.fausto.institutions_app.repository.UniversityRepository
 import br.com.fausto.institutions_app.util.ConnectionChecker
-import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), UniversityAdapter.OnUniversityListener {
