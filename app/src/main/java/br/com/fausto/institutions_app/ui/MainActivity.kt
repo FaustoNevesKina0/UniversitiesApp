@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity(), UniversityAdapter.OnUniversityListener
         txtName = edit_text_search
         context = this
         repository = UniversityRepository(AppDatabase.getInstance(this).universityDao)
-        Stetho.initializeWithDefaults(this)
     }
 
     fun btnSearch(view: View) {
