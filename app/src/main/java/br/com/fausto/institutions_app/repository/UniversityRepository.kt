@@ -13,7 +13,6 @@ class UniversityRepository(private val universityDao: UniversityDao) {
 
     fun getListOfUniversities(name: String, success: (MutableList<UniversityParsedItem>?) -> Unit, failure: () -> Unit) {
         universityClient.getUniversities(name, success = {
-            clearTable()
             loadListToDB(it!!)
             success(it)
         }, failure = {
@@ -23,8 +22,11 @@ class UniversityRepository(private val universityDao: UniversityDao) {
 
     private fun loadListToDB(list: MutableList<UniversityParsedItem>) {
         GlobalScope.launch {
-            for (item in list) {
-                universityDao.save(item)
+            val job = async { universityDao.clearTable() }
+            job.await().let {
+                for (item in list) {
+                    universityDao.save(item)
+                }
             }
         }
     }
@@ -37,7 +39,4 @@ class UniversityRepository(private val universityDao: UniversityDao) {
             success(listToDB.await())
         }
     }
-
-    fun clearTable() = GlobalScope.launch { universityDao.clearTable() }
-
 }
